@@ -1,5 +1,8 @@
+import React from "react";
+import Homepage from "../src/pages/Homepage";
+
 function App() {
-  return <div class="underline text-4xl">Hello World</div>;
+  return <Homepage />;
 }
 
 export default App;
