@@ -1,9 +1,9 @@
 import React from "react";
 import pikachu from "../Navbar/pikachu.png";
 
-function Navbar() {
+function Navbar({ pokemonSearch }) {
   return (
-    <nav class="bg-primary-blue mb-4 border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+    <nav class="bg-primary-blue bg-opacity-95 mb-4 sticky top-0 z-50 shadow-xl border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="https://pokeapi.co/" class="flex items-center">
           <img src={pikachu} class="h-24 mr-3" alt="Pikachu" />
@@ -29,6 +29,7 @@ function Navbar() {
               </svg>
             </div>
             <input
+              onChange={(e) => pokemonSearch(e.target.value)}
               type="text"
               placeholder="Search..."
               class="w-96 p-2 pl-10 text-xs font-press-start font-light text-primary-yellow border border-primary-yellow rounded-md bg-primary-blue focus:ring-primary-yellow focus:border-primary-blue"
