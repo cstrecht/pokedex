@@ -60,7 +60,17 @@ const Homepage = () => {
           /> //pass a prop name to show the pokemon name
         ))}
       </div>
-      <Modal />
+      {pokemons.map((pokemon, key) => (
+        <Modal
+          key={key}
+          name={pokemon.data.name}
+          image={pokemon.data.sprites.other.dream_world.front_default}
+          stats={pokemon.data.stats}
+          height={pokemon.data.height}
+          weight={pokemon.data.weight}
+          experience={pokemon.data.base_experience}
+        />
+      ))}
     </div>
   );
 };

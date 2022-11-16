@@ -1,8 +1,8 @@
-import React from "react";
-import pokeball from "../Modal/pokeball.png";
+import React, { useState } from "react";
 
-function Modal() {
+function Modal({ name, image, height, weight, experience }) {
   const [showModal, setShowModal] = React.useState(false);
+
   return (
     <div>
       <button
@@ -12,6 +12,7 @@ function Modal() {
       >
         open test
       </button>
+
       {showModal ? (
         <div class="m-auto bg-primary-blue bg-opacity-50 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -38,21 +39,30 @@ function Modal() {
                 <div class="bg-white px-4 pb-4 ">
                   <img
                     class="h-48 mx-auto"
-                    src={pokeball}
+                    src={image}
                     alt="Default pokeball"
                   />
                   <div class="flex flex-col justify-center items-center">
-                    <h3 class="font-press-start text-lg font-medium leading-6 text-gray-900 mt-8">
-                      Pokemon name
+                    <h3 class="font-press-start text-3xl font-medium leading-6 text-gray-900 mt-8 capitalize">
+                      {name}
                     </h3>
                     <div class="mt-2">
-                      <p class="font-v-t text-gray-500">Stats here</p>
+                      <p class="font-v-t text-gray-500"></p>
                     </div>
                     <div class="mt-2">
-                      <p class="font-v-t text-gray-500">Weight here</p>
+                      <p class="font-v-t text-2xl text-gray-500">
+                        Height: {height} inch
+                      </p>
                     </div>
                     <div class="mt-2">
-                      <p class="font-v-t text-gray-500">Abilities here</p>
+                      <p class="font-v-t text-2xl text-gray-500">
+                        Weight: {weight} pounds
+                      </p>
+                    </div>
+                    <div class="mt-2">
+                      <p class="font-v-t text-2xl text-gray-500">
+                        Experience: {experience} points
+                      </p>
                     </div>
                   </div>
                 </div>

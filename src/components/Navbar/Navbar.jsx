@@ -3,11 +3,11 @@ import pikachu from "../Navbar/pikachu.png";
 
 function Navbar({ pokemonSearch }) {
   return (
-    <nav class="bg-primary-blue bg-opacity-95 mb-4 sticky top-0 z-50 shadow-xl border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+    <nav class="bg-primary-blue bg-opacity-95 mb-4 sticky top-0 z-50 shadow-xl border-gray-200 px-2 sm:px-4 py-2.5">
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="https://pokeapi.co/" class="flex items-center">
           <img src={pikachu} class="h-24 mr-3" alt="Pikachu" />
-          <span class="self-center text-primary-yellow text-4xl font-press-start font-semibold whitespace-nowrap dark:text-white">
+          <span class="text-primary-yellow self-center text-4xl font-press-start font-semibold whitespace-nowrap">
             Pokédex
           </span>
         </a>
@@ -58,7 +58,7 @@ function Navbar({ pokemonSearch }) {
             </div>
             <input
               type="text"
-              class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-100 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-100 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
