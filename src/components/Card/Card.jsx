@@ -1,5 +1,5 @@
 import React from "react";
-import pokeball from "../Card/pokeball.png";
+// import pokeball from "../Card/pokeball.png"; //for default image
 
 //receives "name" from the API
 function Card({ name, image, types }) {
@@ -11,7 +11,7 @@ function Card({ name, image, types }) {
     return "#" + types[0].type.name;
   };
   return (
-    <div class="m-4 max-w-sm rounded-xl overflow-hidden shadow-lg">
+    <div class="m-4 max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer ">
       <div class="px-8 py-4">
         <img class="h-32 m-auto" src={image} alt="Pokeball" />
         <div class="font-bold text-3xl my-2 font-v-t capitalize">{name}</div>

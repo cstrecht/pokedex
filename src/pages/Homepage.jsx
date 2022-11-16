@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Card from "../components/Card/Card";
+import Modal from "../components/Modal/Modal";
 import axios from "axios";
 
 const Homepage = () => {
@@ -17,6 +18,7 @@ const Homepage = () => {
     for (var i = 1; i <= 50; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
+    console.log(endpoints);
     //New way: lets use axios.all to create a list of EACH pokemon (limit=20), with ALL details, this will solve the url issue!
     axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
@@ -58,6 +60,7 @@ const Homepage = () => {
           /> //pass a prop name to show the pokemon name
         ))}
       </div>
+      <Modal />
     </div>
   );
 };
