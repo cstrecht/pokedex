@@ -1,113 +1,69 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-//Components:
+import uniqBy from "lodash/uniqBy";
+import filter from "lodash/filter";
 import Card from "../components/Card/Card";
 import Navbar from "../components/Navbar/Navbar";
 
-const Homepage = () => {
-  //Create a state to show the pokemons:
+function generateUrl(page) {
+  const url = new URL("https://pokeapi.co/api/v2/pokemon");
+  url.searchParams.set("limit", 20);
+  url.searchParams.set("offset", page * 20);
+  // console.log(page);
+
+  return url.toString();
+}
+export default function Homepage() {
   const [pokemons, setPokemons] = useState([]);
+  const [page, setPage] = useState(0);
+  const [searchPokemons, setSearchPokemons] = useState([]);
 
-  // --- API REQUEST: ---
-  // useEffect(() => {
-  //   getPokemons(); //it does the request when it is CREATED and/or UPDATED. that's why i used useEffect (for secundary effects on the component).
-  // }, []);
-  // const getPokemons = () => {
-  //   //This request only gives me the name of the pokemon and the URL. Inside the URL there are a lot of info that I need. I need to do a GET inside that URL to get more infos
-  //   var endpoints = [];
-  //   for (var i = 1; i <= 50; i++) {
-  // endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
-  //   }
-
-  //   //New way: lets use axios.all to create a list of EACH pokemon (limit=20), with ALL details, this will solve the url issue!
-  //   axios
-  //     .all(endpoints.map((endpoint) => axios.get(endpoint)))
-  //     .then((res) => setPokemons(res));
-  //   console.log(endpoints);
-  //   //Promise:
-  //   //Old way:
-  //   // axios
-  //   //   .get("https://pokeapi.co/api/v2/pokemon?limit=20")
-  //   //   .then((res) => setPokemons(res.data.results)) //for a response
-  //   //   .catch((err) => console.log(err)); //for an error
-  // };
-  //------
-
-  const getPokemonList = async () => {
-    var pokemonArray = [];
-    for (var i = 1; i <= 50; i++) {
-      pokemonArray.push(await getPokemonData(i));
-    }
-    console.log(pokemonArray);
-    setPokemons(pokemonArray);
-  };
-  const getPokemonData = async (id) => {
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
-    return res;
+  // -*- Request API Data -*-
+  const loadPokemon = async (page) => {
+    const response = await fetch(generateUrl(page));
+    const json = await response.json();
+    setPokemons((pokemons) => uniqBy([...pokemons, ...json.results], "url"));
   };
 
-  //--- SEARCH FEATURE: ---
-  const pokemonSearch = (name) => {
-    var searchedPokemons = [];
-    //go back to all pokemons when search bar is empty:
-    if (name === "") {
-      getPokemonList();
-    }
-
-    for (var pokemon of pokemons) {
-      if (pokemon.data.name.includes(name)) {
-        searchedPokemons.push(pokemon);
-      }
-    }
-    setPokemons(searchedPokemons);
-  };
-
+  // -*- Infinite Scroll -*-
   const handleScroll = (e) => {
-    // console.log("top: " + e.target.documentElement.scrollTop);
-    // console.log("window: " + window.innerHeight);
-    // console.log("height: " + e.target.documentElement.scrollHeight);
-    // console.log("hi");
-    //condition to be at the bottom of the web page:
-    if (
-      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-      e.target.documentElement.scrollHeight
-    ) {
-      console.log("at the bottom of the page");
-      getPokemonList();
-    }
+    const currentHeight =
+      window.innerHeight + e.target.documentElement.scrollTop + 1;
+    const triggerHeight = e.target.documentElement.scrollHeight;
+    if (currentHeight >= triggerHeight) setPage((page) => page + 1);
   };
 
   useEffect(() => {
-    getPokemonList(); //load more pokemons
+    loadPokemon(page);
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    loadPokemon(page);
+  }, [page]);
+
+  // -*- Search Feature -*-
+  const pokemonSearch = (name) => {
+    let filteredPokemons = filter(pokemons, (pokemon) => {
+      pokemon.name.includes(name);
+    });
+
+    console.log(filteredPokemons);
+    //setSearchPokemons(searchPokemons);
+  };
 
   return (
     <div>
       <Navbar pokemonSearch={pokemonSearch} />
       <div className="grid grid-cols-4">
-        {pokemons.map((pokemon, key) => (
-          <Card pokemon={pokemon.data} key={key} />
-        ))}
+        {searchPokemons.length === 0
+          ? pokemons.map((pokemon, index) => (
+              <Card url={pokemon.url} key={pokemon.name} />
+            ))
+          : searchPokemons.map((pokemon, index) => (
+              <Card url={pokemon.url} key={pokemon.name} />
+            ))}
       </div>
-
-      {/* {pokemon.map((pokemon, key) => (
-        <Modal
-          key={key}
-          name={pokemon.data.name}
-          image_nintendo={pokemon.data.sprites.front_default}
-          image_dream_world={
-            pokemon.data.sprites.other.dream_world.front_default
-          }
-          hp={pokemon.data.stats[0].base_stat}
-          height={pokemon.data.height}
-          weight={pokemon.data.weight}
-          experience={pokemon.data.base_experience}
-        />
-      ))} */}
     </div>
   );
-};
-export default Homepage;
+}
