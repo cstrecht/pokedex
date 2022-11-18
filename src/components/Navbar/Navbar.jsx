@@ -3,7 +3,7 @@ import pikachu from "../Navbar/pikachu.png";
 
 function Navbar() {
   return (
-    <nav class="bg-primary-blue border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+    <nav class="bg-primary-blue mb-4 border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
       <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="https://pokeapi.co/" class="flex items-center">
           <img src={pikachu} class="h-24 mr-3" alt="Pikachu" />

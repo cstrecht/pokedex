@@ -3,7 +3,7 @@ import pokeball from "../Card/pokeball.png";
 
 function Card() {
   return (
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="m-4 max-w-sm rounded overflow-hidden shadow-lg">
       <div class="px-8 py-4">
         <img class="h-32 m-auto" src={pokeball} alt="Pokeball" />
         <div class="font-bold text-3xl my-2 font-v-t">Pokemon Name here</div>
