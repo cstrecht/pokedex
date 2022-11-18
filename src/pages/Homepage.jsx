@@ -1,28 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Card from "../components/Card/Card";
 import axios from "axios";
 
 const Homepage = () => {
+  //Create a state to show the pokemons:
+  const [pokemons, setPokemons] = useState([]);
+
   useEffect(() => {
     getPokemons(); //it does the request when it is CREATED and/or UPDATED. that's why i used useEffect (for secundary effects on the component).
   });
   const getPokemons = () => {
+    //This request only gives me the name of the pokemon and the URL. Inside the URL there are a lot of info that I need. I need to do a GET inside that URL to get more infos
+    var endpoints = [];
+    for (var i = 1; i <= 50; i++) {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+    }
+
+    console.log(endpoints);
+    //New way: lets use axios.all to create a list of EACH pokemon (limit=20), with ALL details, this will solve the url issue!
+    var response = axios
+      .all(endpoints.map((endpoint) => axios.get(endpoint)))
+      .then((res) => setPokemons(res));
+
+    return response;
     //Promise:
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=20")
-      .then((res) => console.log(res)) //for a response
-      .catch((err) => console.log(err)); //for an error
+    //Old way:
+    // axios
+    //   .get("https://pokeapi.co/api/v2/pokemon?limit=20")
+    //   .then((res) => setPokemons(res.data.results)) //for a response
+    //   .catch((err) => console.log(err)); //for an error
   };
 
   return (
     <div>
       <Navbar />
-      <div className="flex justify-center">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+      <div className="grid grid-cols-4">
+        {pokemons.map((pokemon, key) => (
+          <Card
+            key={key}
+            name={pokemon.data.name}
+            image={pokemon.data.sprites.other.dream_world.front_default}
+          /> //pass a prop name to show the pokemon name
+        ))}
       </div>
     </div>
   );
