@@ -4,7 +4,12 @@ module.exports = {
   theme: {
     colors: {
       "primary-blue": "#2a75bb",
+      "secundary-blue": "#4086c7",
       "primary-yellow": "#ffcb05",
+      "secundary-yellow": "#D5A100",
+      "light-grey": "#f4f4f5",
+      white: "#ffffff",
+      "dark-grey": "#18181b",
     },
     extend: {
       fontFamily: {

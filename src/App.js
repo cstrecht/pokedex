@@ -1,8 +1,27 @@
 import React from "react";
-import Homepage from "../src/pages/Homepage";
+import { Route, Routes, useLocation } from "react-router-dom";
+
+//Components:
+import Modal from "./components/Modal/Modal";
+import Homepage from "./pages/Homepage";
 
 function App() {
-  return <Homepage />;
+  const location = useLocation();
+  const background = location.state && location.state.background;
+  return (
+    <div>
+      <Routes location={background || location}>
+        <Route path="/" element={<Homepage />}>
+          <Route path="/pokemon/:id" element={<Modal />} />
+        </Route>
+      </Routes>
+      {background && (
+        <Routes>
+          <Route path="/pokemon/:id" element={<Modal />} />
+        </Routes>
+      )}
+    </div>
+  );
 }
 
 export default App;
