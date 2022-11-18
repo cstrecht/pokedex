@@ -19,7 +19,10 @@ const Modal = () => {
   return (
     pokemon && (
       <div>
-        <div className="fixed m-auto font-v-t bg-primary-blue bg-opacity-50 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div
+          onClick={() => navigate(-1)}
+          className="fixed m-auto font-v-t bg-primary-blue bg-opacity-50 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -31,8 +34,8 @@ const Modal = () => {
                       {pokemon.stats[0].base_stat}✪
                     </span>
                   </div>
-                  <svg
-                    onClick={() => navigate(-1)}
+                  {/* <svg
+                    
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -45,7 +48,7 @@ const Modal = () => {
                       strokeLinejoin="round"
                       d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
-                  </svg>
+                  </svg> */}
                 </div>
                 <div className="bg-secundary-yellow border-b-[12px] border-l-[12px] border-r-[12px] border-primary-yellow px-8 pb-8 ">
                   <div className="bg-secundary-blue flex justify-center rounded-lg border-2 border-primary-yellow">
