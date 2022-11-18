@@ -53,6 +53,7 @@ const Homepage = () => {
           <Card
             key={key}
             name={pokemon.data.name}
+            types={pokemon.data.types} //a pokemon can have 1 or 2 types
             image={pokemon.data.sprites.other.dream_world.front_default}
           /> //pass a prop name to show the pokemon name
         ))}

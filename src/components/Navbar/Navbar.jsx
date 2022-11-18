@@ -8,7 +8,7 @@ function Navbar({ pokemonSearch }) {
         <a href="https://pokeapi.co/" class="flex items-center">
           <img src={pikachu} class="h-24 mr-3" alt="Pikachu" />
           <span class="self-center text-primary-yellow text-4xl font-press-start font-semibold whitespace-nowrap dark:text-white">
-            Pokedex
+            Pokédex
           </span>
         </a>
         <div class="flex md:order-2">
@@ -29,7 +29,7 @@ function Navbar({ pokemonSearch }) {
               </svg>
             </div>
             <input
-              onChange={(e) => pokemonSearch(e.target.value)}
+              onChange={(e) => pokemonSearch(e.target.value.toLowerCase())}
               type="text"
               placeholder="Search..."
               class="w-96 p-2 pl-10 text-xs font-press-start font-light text-primary-yellow border border-primary-yellow rounded-md bg-primary-blue focus:ring-primary-yellow focus:border-primary-blue"
