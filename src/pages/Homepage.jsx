@@ -3,12 +3,11 @@ import axios from "axios";
 
 //Components:
 import Card from "../components/Card/Card";
-import Modal from "../components/Modal/Modal";
 import Navbar from "../components/Navbar/Navbar";
 
 const Homepage = () => {
   //Create a state to show the pokemons:
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   // --- API REQUEST: ---
   // useEffect(() => {
@@ -34,19 +33,18 @@ const Homepage = () => {
   //   //   .catch((err) => console.log(err)); //for an error
   // };
   //------
-  useEffect(() => {
-    getPokemonList();
-  }, []);
+
   const getPokemonList = async () => {
     var pokemonArray = [];
     for (var i = 1; i <= 50; i++) {
       pokemonArray.push(await getPokemonData(i));
     }
     console.log(pokemonArray);
-    setPokemon(pokemonArray);
+    setPokemons(pokemonArray);
   };
   const getPokemonData = async (id) => {
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
     return res;
   };
 
@@ -58,25 +56,44 @@ const Homepage = () => {
       getPokemonList();
     }
 
-    for (var i in pokemon) {
-      if (pokemon[i].data.name.includes(name)) {
-        searchedPokemons.push(pokemon[i]);
+    for (var pokemon of pokemons) {
+      if (pokemon.data.name.includes(name)) {
+        searchedPokemons.push(pokemon);
       }
     }
-    setPokemon(searchedPokemons);
+    setPokemons(searchedPokemons);
   };
+
+  const handleScroll = (e) => {
+    // console.log("top: " + e.target.documentElement.scrollTop);
+    // console.log("window: " + window.innerHeight);
+    // console.log("height: " + e.target.documentElement.scrollHeight);
+    // console.log("hi");
+    //condition to be at the bottom of the web page:
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop + 1 >=
+      e.target.documentElement.scrollHeight
+    ) {
+      console.log("at the bottom of the page");
+      getPokemonList();
+    }
+  };
+
+  useEffect(() => {
+    getPokemonList(); //load more pokemons
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div>
       <Navbar pokemonSearch={pokemonSearch} />
       <div className="grid grid-cols-4">
-        {pokemon.map((pokemon, key) => (
+        {pokemons.map((pokemon, key) => (
           <Card pokemon={pokemon.data} key={key} />
         ))}
       </div>
-      {/* See later: I think the ERROR is here... */}
-      {/* 
-      {pokemon.map((pokemon, key) => (
+
+      {/* {pokemon.map((pokemon, key) => (
         <Modal
           key={key}
           name={pokemon.data.name}

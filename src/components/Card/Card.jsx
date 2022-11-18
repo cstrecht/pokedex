@@ -15,8 +15,8 @@ function Card({ pokemon }) {
   };
 
   return (
-    <div className="m-4 font-v-t max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer">
-      <Link to={`/${pokemon.name}`} state={{ background: location }}>
+    <Link to={`/pokemon/${pokemon.name}`} state={{ background: location }}>
+      <div className="m-4 font-v-t max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer">
         <div className="px-8 py-4">
           <img
             className="h-32 m-auto"
@@ -36,9 +36,9 @@ function Card({ pokemon }) {
             {getTypes()}
           </span>
         </div>
-      </Link>
-      <Outlet />
-    </div>
+        <Outlet />
+      </div>
+    </Link>
   );
 }
 export default Card;
