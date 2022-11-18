@@ -7,23 +7,21 @@ const Homepage = () => {
   //Create a state to show the pokemons:
   const [pokemons, setPokemons] = useState([]);
 
+  // --- API REQUEST: ---
   useEffect(() => {
     getPokemons(); //it does the request when it is CREATED and/or UPDATED. that's why i used useEffect (for secundary effects on the component).
-  });
+  }, []);
   const getPokemons = () => {
     //This request only gives me the name of the pokemon and the URL. Inside the URL there are a lot of info that I need. I need to do a GET inside that URL to get more infos
     var endpoints = [];
     for (var i = 1; i <= 50; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
-
-    console.log(endpoints);
     //New way: lets use axios.all to create a list of EACH pokemon (limit=20), with ALL details, this will solve the url issue!
-    var response = axios
+    axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then((res) => setPokemons(res));
 
-    return response;
     //Promise:
     //Old way:
     // axios
@@ -32,9 +30,24 @@ const Homepage = () => {
     //   .catch((err) => console.log(err)); //for an error
   };
 
+  //--- SEARCH FEATURE: ---
+  const pokemonSearch = (name) => {
+    var searchedPokemons = [];
+    //go back to all pokemons when search bar is empty:
+    if (name === "") {
+      getPokemons();
+    }
+
+    for (var i in pokemons) {
+      if (pokemons[i].data.name.includes(name)) {
+        searchedPokemons.push(pokemons[i]);
+      }
+    }
+    setPokemons(searchedPokemons);
+  };
   return (
     <div>
-      <Navbar />
+      <Navbar pokemonSearch={pokemonSearch} />
       <div className="grid grid-cols-4">
         {pokemons.map((pokemon, key) => (
           <Card
