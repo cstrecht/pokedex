@@ -1,77 +1,103 @@
-import React, { useState } from "react";
+import React from "react";
+import logo from "../Modal/logo.png";
+import { useNavigate } from "react-router-dom";
 
-function Modal({ name, image, height, weight, experience }) {
-  const [showModal, setShowModal] = React.useState(false);
+const Modal = ({
+  experience,
+  height,
+  hp,
+  image_dream_world,
+  image_nintendo,
+  name,
+  weight,
+}) => {
+  const navigate = useNavigate();
 
   return (
     <div>
-      <button
-        className="bg-pink-500  active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        open test
-      </button>
-
-      {showModal ? (
-        <div class="m-auto bg-primary-blue bg-opacity-50 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-          <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div class=" p-4 flex flex-row-reverse">
-                  <svg
-                    onClick={() => setShowModal(false)}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6 hover:cursor-pointer"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+      <div className="absolute m-auto font-v-t bg-primary-blue bg-opacity-50 items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <div className="bg-secundary-yellow border-t-[12px] border-l-[12px] border-r-[12px] border-primary-yellow pt-2 pb-4 px-8 flex justify-between">
+                <div className="text-lg">
+                  HP <span className="text-5xl">{hp}✪</span>
                 </div>
-                <div class="bg-white px-4 pb-4 ">
-                  <img
-                    class="h-48 mx-auto"
-                    src={image}
-                    alt="Default pokeball"
+                <button onClick={() => navigate(-1)}>Close</button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 hover:cursor-pointer hover:text-primary-blue"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
-                  <div class="flex flex-col justify-center items-center">
-                    <h3 class="font-press-start text-3xl font-medium leading-6 text-gray-900 mt-8 capitalize">
-                      {name}
+                </svg>
+              </div>
+              <div className="bg-secundary-yellow border-b-[12px] border-l-[12px] border-r-[12px] border-primary-yellow px-8 pb-8 ">
+                <div className="bg-secundary-blue flex justify-center rounded-lg border-2 border-primary-yellow">
+                  {" "}
+                  <div>
+                    {" "}
+                    <img
+                      className="h-48 mx-auto"
+                      src={image_nintendo}
+                      alt="Default pokeball"
+                    />
+                    <h3 className="text-center text-md text-white">
+                      Gameboy Color(1998)
                     </h3>
-                    <div class="mt-2">
-                      <p class="font-v-t text-gray-500"></p>
-                    </div>
-                    <div class="mt-2">
-                      <p class="font-v-t text-2xl text-gray-500">
-                        Height: {height} inch
-                      </p>
-                    </div>
-                    <div class="mt-2">
-                      <p class="font-v-t text-2xl text-gray-500">
-                        Weight: {weight} pounds
-                      </p>
-                    </div>
-                    <div class="mt-2">
-                      <p class="font-v-t text-2xl text-gray-500">
-                        Experience: {experience} points
-                      </p>
-                    </div>
+                  </div>
+                  <div>
+                    {" "}
+                    <img
+                      className="h-48 mx-auto"
+                      src={image_dream_world}
+                      alt="Default pokeball"
+                    />
+                    <h3 className="text-center text-md text-white">
+                      Dream World (2010)
+                    </h3>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center bg-secundary-blue rounded-lg mt-7 pb-3 border-2 border-primary-yellow">
+                  <h3 className="font-press-start text-white  text-3xl font-medium leading-6 text-gray-900 mt-8 capitalize">
+                    {name}
+                  </h3>
+                  <div className="mt-2">
+                    <p className="font-v-t text-gray-500"></p>
+                  </div>
+                  <div className="mt-2">
+                    <p className="font-v-t text-2xl text-gray-500">
+                      Height: {height} inches
+                    </p>
+                  </div>
+                  <div className="mt-2">
+                    <p className="font-v-t text-2xl text-gray-500">
+                      Weight: {weight} pounds
+                    </p>
+                  </div>
+                  <div className="mt-2">
+                    <p className="font-v-t text-2xl text-gray-500">
+                      Experience: {experience} points
+                    </p>
+                  </div>
+                  <div>
+                    <img className="h-12 mt-8" src={logo} alt="pokemon logo" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      ) : null}
+      </div>
     </div>
   );
-}
+};
 export default Modal;

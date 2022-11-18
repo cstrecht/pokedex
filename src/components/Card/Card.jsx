@@ -1,29 +1,43 @@
 import React from "react";
-// import pokeball from "../Card/pokeball.png"; //for default image
+import pokeball from "../Card/pokeball.png"; //default image
+import { Link, useLocation, Outlet } from "react-router-dom";
 
-//receives "name" from the API
-function Card({ name, image, types }) {
-  //A function to map all the types of the pokemons (there are 1 or 2)
-
+function Card({ pokemon }) {
+  const location = useLocation();
+  //A function to map all the types of the pokemons (a pokemon can have, at max, 2 types)
   const getTypes = () => {
-    if (types[1]) {
-      return "#" + types[0].type.name + " " + "#" + types[1].type.name;
+    if (pokemon.types[1]) {
+      return (
+        "#" + pokemon.types[0].type.name + " #" + pokemon.types[1].type.name
+      );
     }
-    return "#" + types[0].type.name;
+    return "#" + pokemon.types[0].type.name;
   };
+
   return (
-    <div class="m-4 max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer ">
-      <div class="px-8 py-4">
-        <img class="h-32 m-auto" src={image} alt="Pokeball" />
-        <div class="font-bold text-center text-3xl my-2 font-v-t capitalize">
-          {name}
+    <div className="m-4 font-v-t max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer">
+      <Link to={`/${pokemon.name}`} state={{ background: location }}>
+        <div className="px-8 py-4">
+          <img
+            className="h-32 m-auto"
+            src={
+              pokemon.sprites.other.dream_world.front_default
+                ? pokemon.sprites.other.dream_world.front_default
+                : pokeball
+            }
+            alt="Pokemon avatar"
+          />
+          <div className="font-bold text-center text-3xl my-2 capitalize">
+            {pokemon.name}
+          </div>
         </div>
-      </div>
-      <div class="text-center px-6 pb-2 font-v-t text-xl text-primary-blue">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 font-semibold text-gray-700 mr-2 mb-2 ">
-          {getTypes()}
-        </span>
-      </div>
+        <div className="text-center px-6 pb-2text-xl text-primary-blue">
+          <span className="inline-block text-lg bg-gray-200 rounded-full px-3 py-1 font-semibold text-gray-700 mr-2 mb-2">
+            {getTypes()}
+          </span>
+        </div>
+      </Link>
+      <Outlet />
     </div>
   );
 }
