@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import uniqBy from "lodash/uniqBy";
-import filter from "lodash/filter";
 import Card from "../components/Card/Card";
 import Navbar from "../components/Navbar/Navbar";
 
@@ -44,12 +43,10 @@ export default function Homepage() {
 
   // -*- Search Feature -*-
   const pokemonSearch = (name) => {
-    let filteredPokemons = filter(pokemons, (pokemon) => {
-      pokemon.name.includes(name);
-    });
-
-    console.log(filteredPokemons);
-    //setSearchPokemons(searchPokemons);
+    const filteredPokemons = pokemons.filter((pokemon) =>
+      pokemon.name.includes(name)
+    );
+    setSearchPokemons(filteredPokemons);
   };
 
   return (
