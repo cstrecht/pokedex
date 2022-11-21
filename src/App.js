@@ -12,12 +12,12 @@ function App() {
     <div>
       <Routes location={background || location}>
         <Route path="/" element={<Homepage />}>
-          <Route path="/pokemon/:id" element={<Modal />} />
+          <Route path="/:id" element={<Modal />} />
         </Route>
       </Routes>
       {background && (
         <Routes>
-          <Route path="/pokemon/:id" element={<Modal />} />
+          <Route path="/:id" element={<Modal />} />
         </Routes>
       )}
     </div>

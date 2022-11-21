@@ -11,13 +11,14 @@ function generateUrl(page) {
 
   return url.toString();
 }
+
 export default function Homepage() {
   const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [searchPokemons, setSearchPokemons] = useState([]);
 
   // -*- Request API Data -*-
-  const loadPokemon = async (page) => {
+  const loadPokemons = async (page) => {
     const response = await fetch(generateUrl(page));
     const json = await response.json();
     setPokemons((pokemons) => uniqBy([...pokemons, ...json.results], "url"));
@@ -32,13 +33,13 @@ export default function Homepage() {
   };
 
   useEffect(() => {
-    loadPokemon(page);
+    loadPokemons(page);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    loadPokemon(page);
+    loadPokemons(page);
   }, [page]);
 
   // -*- Search Feature -*-
