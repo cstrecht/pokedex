@@ -19,9 +19,21 @@ export default function Homepage() {
 
   // -*- Request API Data -*-
   const loadPokemons = async (page) => {
-    const response = await fetch(generateUrl(page));
-    const json = await response.json();
-    setPokemons((pokemons) => uniqBy([...pokemons, ...json.results], "url"));
+    fetch(generateUrl(page))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("api fail");
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setPokemons((pokemons) =>
+          uniqBy([...pokemons, ...json.results], "url")
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // -*- Infinite Scroll -*-
