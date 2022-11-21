@@ -25,8 +25,8 @@ function Card({ url, name }) {
   return (
     pokemon && (
       <Link to={`/pokemon/${pokemon.name}`} state={{ background: location }}>
-        <div className="m-4 font-v-t max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer">
-          <div className="px-8 py-4">
+        <div className="m-2 sm:m-4 font-v-t max-w-sm rounded-xl overflow-hidden shadow-lg hover:bg-light-grey hover:cursor-pointer">
+          <div className="px-8 py-0 sm:py-4">
             <img
               className="h-32 m-auto"
               src={
@@ -36,12 +36,12 @@ function Card({ url, name }) {
               }
               alt="Pokemon avatar"
             />
-            <div className="font-bold text-center text-3xl my-2 capitalize">
+            <div className="font-bold text-center text-xl sm:text-3xl my-2 capitalize">
               {pokemon.name}
             </div>
           </div>
-          <div className="text-center px-6 pb-2text-xl text-primary-blue">
-            <span className="inline-block text-lg bg-gray-200 rounded-full px-3 py-1 font-semibold text-gray-700 mr-2 mb-2">
+          <div className="text-center px-0 sm:px-6 pb-2text-xl text-primary-blue">
+            <span className="inline-block text-sm sm:text-lg bg-gray-200 rounded-full px-3 py-1 font-light text-gray-700 mr-2 mb-2">
               {getTypes()}
             </span>
           </div>

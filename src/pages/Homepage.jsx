@@ -52,7 +52,7 @@ export default function Homepage() {
   return (
     <div>
       <Navbar pokemonSearch={pokemonSearch} />
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {searchPokemons.length === 0
           ? pokemons.map((pokemon, index) => (
               <Card url={pokemon.url} key={pokemon.name} />

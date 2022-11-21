@@ -5,17 +5,28 @@ function Navbar({ pokemonSearch }) {
   return (
     <nav className="bg-primary-blue bg-opacity-90 mb-4 sticky top-0 z-50 shadow-xl border-gray-200 px-2 sm:px-4 py-2.5">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="https://pokeapi.co/" className="flex items-center">
-          <img src={pikachu} className="h-24 mr-3" alt="Pikachu" />
-          <span className="text-primary-yellow self-center text-4xl font-press-start font-semibold whitespace-nowrap">
-            Pokédex
-          </span>
+        <a href="https://github.com/cstrecht" className="flex items-center">
+          <img src={pikachu} className="h-12 sm:h-24 mr-3" alt="Pikachu" />
+          <div>
+            <span className="text-primary-yellow self-center text-xl sm:text-3xl md:text-4xl font-press-start font-semibold whitespace-nowrap">
+              Pokédex
+            </span>
+            <div className="text-left sm:text-right text-primary-yellow text-xs sm:text-sm font-v-t">
+              made with ❤ by{" "}
+              <a
+                className="underline hover:cursor-pointer hover:text-secundary-yellow"
+                href="https://github.com/cstrecht"
+              >
+                carolina
+              </a>
+            </div>
+          </div>
         </a>
         <div className="flex md:order-2">
-          <div className="relative hidden md:block">
+          <div className="relative block">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
-                className="w-5 h-5 text-primary-yellow"
+                className="h-3 sm:h-5 text-primary-yellow"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -34,7 +45,7 @@ function Navbar({ pokemonSearch }) {
               }
               type="text"
               placeholder="Search..."
-              className="w-96 p-2 pl-10 text-xs font-press-start font-light text-primary-yellow border border-primary-yellow rounded-md bg-primary-blue focus:ring-primary-yellow focus:border-primary-blue"
+              className="w-32 sm:w-60 lg:w-96 p-2 pl-10 text-[8px] sm:text-xs font-press-start font-light text-primary-yellow border border-primary-yellow rounded-md bg-primary-blue focus:ring-primary-yellow focus:border-primary-blue"
             />
           </div>
         </div>
