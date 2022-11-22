@@ -19,7 +19,7 @@ https://pokedex-cstrecht.vercel.app/
 
 - [React](https://reactjs.org/)
 - [React Router v6](https://reactrouter.com/en/main)
-- [Tailwind](https://tailwindcss.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - Deployed with [Vercel](https://vercel.com/dashboard)
 
 ## 🚀 Getting Started
