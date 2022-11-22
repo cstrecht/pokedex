@@ -8,7 +8,7 @@ This project was built using the [PokéAPI](https://pokeapi.co/).
 
 ## 👀 Try the demo!
 
-## https://pokedex-cstrecht.vercel.app/
+https://pokedex-cstrecht.vercel.app/
 
 <div align="center">  
     <img alt="Prints from different screens" src="docs/screens.png"  />
