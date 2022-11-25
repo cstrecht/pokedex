@@ -4,7 +4,7 @@
 
 The Pokedex App is a responsive app where the user can access a complete list of Pokemons, search them and check the details for a specific pokemon by clicking on them. Gotta catch 'em all!
 
-This project was built using the [PokéAPI](https://pokeapi.co/).
+This project was built using an open RESTful API - [PokéAPI](https://pokeapi.co/).
 
 ## 👀 Try the demo!
 
