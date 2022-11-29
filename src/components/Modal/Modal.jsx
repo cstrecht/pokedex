@@ -11,7 +11,7 @@ function Modal() {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((response) => {
         if (!response.ok) {
-          return (window.location.href = "/404"); // ???? it works btw
+          return (window.location.href = "/404");
         }
         return response.json();
       })

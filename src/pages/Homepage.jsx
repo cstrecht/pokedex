@@ -7,8 +7,6 @@ function generateUrl(page) {
   const url = new URL("https://pokeapi.co/api/v2/pokemon");
   url.searchParams.set("limit", 20);
   url.searchParams.set("offset", page * 20);
-  // console.log(page);
-
   return url.toString();
 }
 
